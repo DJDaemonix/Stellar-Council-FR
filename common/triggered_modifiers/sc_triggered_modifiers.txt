@@ -1,0 +1,143 @@
+sc_tm_budget_minimal = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_budget_minimal
+	}
+	
+	influence_gain_add = 1
+	ship_upkeep_mult = -0.04
+	
+}
+
+sc_tm_budget_low = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_budget_low
+	}
+	
+	influence_gain_add = 2
+	ship_upkeep_mult = -0.08
+	
+}
+
+sc_tm_budget_acceptable = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_budget_acceptable
+	}
+	
+	influence_gain_add = 3
+	ship_upkeep_mult = -0.12
+	
+}
+
+sc_tm_budget_high = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_budget_high
+	}
+	
+	influence_gain_add = 4
+	ship_upkeep_mult = -0.16
+	
+}
+
+sc_tm_budget_extreme = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_budget_extreme
+	}
+	
+	influence_gain_add = 5
+	ship_upkeep_mult = -0.2
+	
+}
+
+sc_tm_research_low = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_research_low
+	}
+	
+	influence_gain_add = -1
+	ship_upkeep_mult = 0.04
+	
+}
+
+sc_tm_research_high = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_research_high
+	}
+	
+	influence_gain_add = -2
+	ship_upkeep_mult = 0.08
+	
+}
+
+sc_tm_health_low = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_health_low
+	}
+	
+	influence_gain_add = -1
+	ship_upkeep_mult = 0.04
+	
+}
+
+sc_tm_health_high = {
+
+	potential = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	trigger = {
+		has_policy_flag = sc_federal_health_high
+	}
+	
+	influence_gain_add = -2
+	ship_upkeep_mult = 0.08
+	
+}

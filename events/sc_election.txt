@@ -1,0 +1,827 @@
+
+namespace = sc_election
+
+
+### Election Check Event
+
+country_event = {
+	id = sc_election.1
+	hide_window = yes
+	
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		OR = {
+			has_policy_flag = sc_federal_election
+			has_policy_flag = sc_federal_representation
+			has_policy_flag = sc_federal_might
+			has_policy_flag = sc_federal_permanent
+		}
+		NOT = {
+			OR = {
+				has_country_flag = sc_election_in_progress
+				has_country_flag = sc_president_election
+				has_country_flag = sc_president_representation
+				has_country_flag = sc_president_might
+				has_country_flag = sc_president_permanent
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					has_policy_flag = sc_federal_election
+					has_policy_flag = sc_federal_permanent
+				}
+			}
+			every_country = {
+				limit = {
+					has_federation = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_election_in_progress
+				set_country_flag = sc_electing
+				set_variable = {
+					which = sc_votes
+					value = 0
+				}
+			}
+			every_country = {
+				limit = {
+					has_federation = yes
+					has_country_flag = sc_electing
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.10
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_representation
+			}
+			every_country = {
+				limit = {
+					has_federation = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_election_in_progress
+				set_country_flag = sc_electing
+				set_variable = {
+					which = sc_votes
+					value = 0
+				}
+			}
+			every_country = {
+				limit = {
+					has_federation = yes
+					has_country_flag = sc_electing
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.100
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_might
+			}
+			set_country_flag = sc_president_might
+		}
+	}
+}
+
+###Casting of Votes
+
+country_event = {
+	id = sc_election.10
+	title = sc_election.10.name
+	desc = sc_election.10.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+	}
+	
+	immediate = {
+		random_country = {
+			limit = {
+				is_in_federation_with = ROOT
+				NOT = {
+					is_country = PREV
+				}
+			}
+			save_event_target_as = sc_candidate_b
+		}
+		random_country = {
+			limit = {
+				is_in_federation_with = ROOT
+				NOT = {
+					OR = {
+						is_country = PREV
+						is_country = event_target:sc_candidate_b
+					}
+				}
+			}
+			save_event_target_as = sc_candidate_c
+		}
+		random_country = {
+			limit = {
+				is_in_federation_with = ROOT
+				NOT = {
+					OR = {
+						is_country = PREV
+						is_country = event_target:sc_candidate_b
+						is_country = event_target:sc_candidate_c
+					}
+				}
+			}
+			save_event_target_as = sc_candidate_d
+		}			
+	}
+	
+	option = {
+		name = sc_election.10.a
+		ai_chance = {
+			factor = 200
+		}
+		hidden_effect = {
+			
+			change_variable = {
+				which = sc_votes
+				value = 1
+			}
+	
+			remove_country_flag = sc_electing
+			
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.11
+				}
+			}
+		}
+	}
+	
+	
+	option = {
+		name = sc_election.10.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1.1
+				event_target:sc_candidate_b = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_candidate_b = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_b
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_b
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_b
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_b
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_b
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_b
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_b
+					value < -200
+				}
+			}
+		}
+		hidden_effect = {
+		
+			event_target:sc_candidate_b = {
+				change_variable = {
+					which = sc_votes
+					value = 1
+				}
+			}
+	
+			remove_country_flag = sc_electing
+			
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.11
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_election.10.c
+		trigger = {
+			event_target:sc_candidate_c = {
+				always = yes
+			}
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1.1
+				event_target:sc_candidate_c = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_candidate_c = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_c
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_c
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_c
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_c
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_c
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_c
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_c
+					value < -200
+				}
+			}
+		}
+		hidden_effect = {
+		
+			event_target:sc_candidate_c = {
+				change_variable = {
+					which = sc_votes
+					value = 1
+				}
+			}
+	
+			remove_country_flag = sc_electing
+			
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.11
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_election.10.d
+		trigger = {
+			event_target:sc_candidate_d = {
+				always = yes
+			}
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1.1
+				event_target:sc_candidate_d = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_candidate_d = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_d
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_d
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_d
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_candidate_d
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_d
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_d
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_candidate_d
+					value < -200
+				}
+			}
+		}
+		hidden_effect = {
+		
+			event_target:sc_candidate_d = {
+				change_variable = {
+					which = sc_votes
+					value = 1
+				}
+			}
+	
+			remove_country_flag = sc_electing
+			
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_election.11
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_election.10.e
+		ai_chance = {
+			factor = 0
+		}
+		hidden_effect = {
+			country_event = {
+				id = sc_election.10 
+			}
+		}
+	}
+}
+
+###Electing Over Check Event
+
+country_event = {
+	id = sc_election.11
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		NOT = {
+			any_country = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				has_country_flag = sc_electing
+			}
+		}
+	}
+	immediate = {
+		country_event = {
+			id = sc_election.12
+		}
+	}		
+}
+
+###Winner Check
+
+country_event = {
+	id = sc_election.12
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	immediate = {
+		### Countdown System Set-up
+		#every_country = {
+		#	limit = {
+		#		OR = {
+		#			is_in_federation_with = ROOT
+		#			is_country = ROOT
+		#		}
+		#	}
+		#	set_variable = {
+		#		which = sc_compare_vote
+		#		value = 0
+		#	}
+		#	every_country = {
+		#		limit = {
+		#			OR = {
+		#				is_in_federation_with = ROOT
+		#				is_country = ROOT
+		#			}
+		#		}
+		#		if = {
+		#			limit = {
+		#				OR = {
+		#					has_policy_flag = sc_federal_election
+		#					has_policy_flag = sc_federal_permanent
+		#				}
+		#			}
+		#			PREV = {
+		#				change_variable = {
+		#					which = sc_compare_vote
+		#					value = 1
+		#				}
+		#			}
+		#		}
+		#		if = {
+		#			limit = {
+		#				has_policy_flag = sc_federal_representation
+		#			}
+		#			every_owned_planet = {
+		#				limit = {
+		#					is_under_colonization = no
+		#				}
+		#				PREVPREV = {
+		#					change_variable = {
+		#						which = sc_compare_vote
+		#						value = 1
+		#					}
+		#				}
+		#			}
+		#		}
+		#	}
+		#}
+		### New System: Comparative System
+		every_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				NOT = {
+					any_country = {
+						is_in_federation_with = PREV
+						NOT = { is_country = PREV }
+						check_variable = {
+							which = sc_votes
+							value > PREV
+						}
+					}
+				}
+			}
+			set_country_flag = sc_winning
+		}
+		ROOT = {
+			country_event = {
+				id = sc_election.13
+			}
+		}
+		### Old System: Countdown System
+		#while = {
+		#	limit = {
+		#		check_variable = {
+		#			which = sc_compare_vote
+		#			value > 0
+		#		}
+		#	}
+		#	random_country = {
+		#		limit = {
+		#			OR = {
+		#				is_in_federation_with = ROOT
+		#				is_country = ROOT
+		#			}
+		#			check_variable = {
+		#				which = sc_votes
+		#				value = sc_compare_vote
+		#			}
+		#		}
+		#		set_country_flag = sc_winning
+		#		ROOT = {
+		#			country_event = {
+		#				id = sc_election.13
+		#			}
+		#		}
+		#		break = yes
+		#	}
+		#	every_country = {
+		#		limit = {
+		#			OR = {
+		#				is_in_federation_with = ROOT
+		#				is_country = ROOT
+		#			}
+		#		}
+		#		change_variable = {
+		#			which = sc_compare_vote
+		#			value = -1
+		#		}
+		#	}
+		#}
+	}
+}
+
+###Winner Declaration
+
+country_event = {
+	id = sc_election.13
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	immediate = {
+		random_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				has_country_flag = sc_winning
+			}
+			save_event_target_as = sc_winner
+			set_federation_leader = THIS
+			#remove_country_flag = sc_winning
+			switch = {
+				trigger = has_policy_flag
+				sc_federal_election = {
+					set_timed_country_flag = {
+						flag = sc_president_election
+						days = 3600
+					}
+				}
+				sc_federal_representation = {
+					set_timed_country_flag = {
+						flag = sc_president_representation
+						days = 3600
+					}
+				
+				}
+				sc_federal_permanent = {
+					set_country_flag = sc_president_permanent
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+			}
+			remove_country_flag = sc_winning
+			remove_country_flag = sc_election_in_progress
+			country_event = {
+				id = sc_election.14
+			}
+		}
+	}
+}
+
+###Election Results Notification
+
+country_event = {
+	id = sc_election.14
+	title = sc_election.14.name
+	picture = GFX_evt_galactic_senate
+	
+	desc = {
+		text = sc_election.14.desc_win
+		trigger = {
+			is_federation_leader = yes
+		}
+	}
+	
+	desc = {
+		text = sc_election.14.desc_lose
+		trigger = {
+			is_federation_leader = no
+		}
+	}		
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+	}
+	
+	option = {
+		name = OK
+	}
+}
+
+###Representation Vote
+
+country_event = {
+	id = sc_election.100
+	title = sc_election.100.name
+	desc = sc_election.100.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+	}
+	
+	immediate = {
+	
+		every_owned_planet = {
+			limit = {
+				is_under_colonization = no
+			}
+			random_list = {
+				40 = {
+					modifier = {
+						factor = 0.25
+						pop_percentage = {
+							percentage > 0.5
+							limit = {
+								happiness < 0.5
+							}
+						}
+					}
+					PREV = {
+						change_variable = {
+							which = sc_votes
+							value = 1
+						}
+					}
+				}
+				20 = {
+					random_country = {
+						limit = {
+							is_in_federation_with = PREVPREV
+							NOT = { is_country = PREVPREV }
+						}
+						change_variable = {
+							which = sc_votes
+							value = 1
+						}
+					}
+					
+				}
+			}
+		}
+		
+		remove_country_flag = sc_electing
+			
+		random_country = {
+			limit = {
+				has_federation = yes
+				is_federation_leader = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+			}
+			country_event = {
+				id = sc_election.11
+			}
+		}		
+	}
+	
+	option = {
+		name = OK
+	}
+}
+

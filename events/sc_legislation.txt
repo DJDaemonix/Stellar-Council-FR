@@ -1,0 +1,3007 @@
+
+namespace = sc_legislation
+
+
+### Law Proposal Event
+country_event = {
+	id = sc_legislation.1
+	title = sc_legislation.1.name
+	desc = sc_legislation.1.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	immediate = {
+		every_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+			}
+			set_country_flag = sc_proposal_ongoing
+		}
+	}
+	
+	option = { #Level 1 - Autonomous Laws
+		name = sc_legislation.1.a
+		custom_tooltip = sc_legislation.1.a.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.10
+			}
+		}
+	}
+	option = { #Level 2 - Federal Laws
+		name = sc_legislation.1.b
+		custom_tooltip = sc_legislation.1.b.tooltip
+		trigger = {
+			OR = {
+				has_policy_flag = sc_federal_federal_laws
+				has_policy_flag = sc_federal_unified_laws
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.20
+			}
+		}
+	}
+	option = { #Level 3 - Unified Laws
+		name = sc_legislation.1.c
+		custom_tooltip = sc_legislation.1.c.tooltip
+		trigger = {
+			has_policy_flag = sc_federal_unified_laws
+		}
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.30
+			}
+		}
+	}
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Level 1 Laws
+
+country_event = {
+	id = sc_legislation.10
+	title = sc_legislation.10.name
+	desc = sc_legislation.10.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Legislative Process
+		name = sc_legislation.10.c
+		custom_tooltip = sc_legislation.10.c.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.13
+			}
+		}
+	}
+	
+	option = { #Federal Leadership
+		name = sc_legislation.10.a
+		custom_tooltip = sc_legislation.10.a.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.11
+			}
+		}
+	}
+	
+	option = { #Federal Legislation
+		name = sc_legislation.10.b
+		custom_tooltip = sc_legislation.10.b.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.12
+			}
+		}
+	}
+	
+	
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.1
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+country_event = {
+	id = sc_legislation.11
+	title = sc_legislation.11.name
+	desc = sc_legislation.11.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Election
+		name = sc_legislation.11.a
+		custom_tooltip = sc_legislation.11.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_election
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_leadership_election
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Might
+		name = sc_legislation.11.b
+		custom_tooltip = sc_legislation.11.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_might
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_leadership_might
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Permanent
+		name = sc_legislation.11.c
+		custom_tooltip = sc_legislation.11.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_permanent
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_leadership_permanent
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Representation
+		name = sc_legislation.11.d
+		custom_tooltip = sc_legislation.11.d.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_representation
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_leadership_representation
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.10
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+country_event = {
+	id = sc_legislation.12
+	title = sc_legislation.12.name
+	desc = sc_legislation.12.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Autonomous Laws
+		name = sc_legislation.12.a
+		custom_tooltip = sc_legislation.12.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_autonomous_laws
+			}
+			has_policy_flag = sc_federal_federal_laws
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_laws_autonomous
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Federal Laws
+		name = sc_legislation.12.b
+		custom_tooltip = sc_legislation.12.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_federal_laws
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_laws_federal
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Unified Laws
+		name = sc_legislation.12.c
+		custom_tooltip = sc_legislation.12.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_unified_laws
+			}
+			has_policy_flag = sc_federal_federal_laws
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_laws_unified
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.10
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+country_event = {
+	id = sc_legislation.13
+	title = sc_legislation.13.name
+	desc = sc_legislation.13.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Consensus
+		name = sc_legislation.13.a
+		custom_tooltip = sc_legislation.13.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_consensus
+			}
+			has_policy_flag = sc_federal_majority
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_legislative_consensus
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Majority
+		name = sc_legislation.13.b
+		custom_tooltip = sc_legislation.13.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_majority
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_legislative_majority
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Discretionary
+		name = sc_legislation.13.c
+		custom_tooltip = sc_legislation.13.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_discretionary
+			}
+			has_policy_flag = sc_federal_majority
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_legislative_discretionary
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.10
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Level 2 Laws
+
+country_event = {
+	id = sc_legislation.20
+	title = sc_legislation.20.name
+	desc = sc_legislation.20.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Federal Budget
+		name = sc_legislation.20.a
+		custom_tooltip = sc_legislation.20.a.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.21
+			}
+		}
+	}
+
+	option = { #Federal Research Institute
+		name = sc_legislation.20.b
+		custom_tooltip = sc_legislation.20.b.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.22
+			}
+		}
+	}
+
+	option = { #Federal Health Institute
+		name = sc_legislation.20.c
+		custom_tooltip = sc_legislation.20.c.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.23
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.1
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+country_event = {
+	id = sc_legislation.21
+	title = sc_legislation.21.name
+	desc = sc_legislation.21.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #None
+		name = sc_legislation.21.a
+		custom_tooltip = sc_legislation.21.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Minimal
+		name = sc_legislation.21.b
+		custom_tooltip = sc_legislation.21.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_minimal
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_minimal
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Low
+		name = sc_legislation.21.c
+		custom_tooltip = sc_legislation.21.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Acceptable
+		name = sc_legislation.21.d
+		custom_tooltip = sc_legislation.21.d.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_acceptable
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_acceptable
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #High
+		name = sc_legislation.21.e
+		custom_tooltip = sc_legislation.21.e.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Extreme
+		name = sc_legislation.21.f
+		custom_tooltip = sc_legislation.21.f.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_budget_extreme
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_budget_extreme
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.20
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Federal Research Institute
+
+country_event = {
+	id = sc_legislation.22
+	title = sc_legislation.22.name
+	desc = sc_legislation.22.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #None
+		name = sc_legislation.22.a
+		custom_tooltip = sc_legislation.22.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_research_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_research_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Low
+		name = sc_legislation.22.b
+		custom_tooltip = sc_legislation.22.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_research_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_research_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #High
+		name = sc_legislation.22.c
+		custom_tooltip = sc_legislation.22.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_research_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_research_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.20
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Federal Health Institute
+
+country_event = {
+	id = sc_legislation.23
+	title = sc_legislation.23.name
+	desc = sc_legislation.23.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #None
+		name = sc_legislation.23.a
+		custom_tooltip = sc_legislation.23.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_health_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_health_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Low
+		name = sc_legislation.23.b
+		custom_tooltip = sc_legislation.23.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_health_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_health_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #High
+		name = sc_legislation.23.c
+		custom_tooltip = sc_legislation.23.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_health_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_health_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.20
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Level 3 Laws
+
+country_event = {
+	id = sc_legislation.30
+	title = sc_legislation.30.name
+	desc = sc_legislation.30.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Open Economy
+		name = sc_legislation.30.a
+		custom_tooltip = sc_legislation.30.a.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.31
+			}
+		}
+	}
+
+	option = { #Federal Rights
+		name = sc_legislation.30.b
+		custom_tooltip = sc_legislation.30.b.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.32
+			}
+		}
+	}
+	
+	option = { #Federal AIRights
+		name = sc_legislation.30.c
+		custom_tooltip = sc_legislation.30.c.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.33
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.1
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit
+	}
+}
+
+###Open Economy
+
+country_event = {
+	id = sc_legislation.31
+	title = sc_legislation.31.name
+	desc = sc_legislation.31.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #Autonomous Economies
+		name = sc_legislation.31.a
+		custom_tooltip = sc_legislation.31.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_open_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_open_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Interconnected Economies
+		name = sc_legislation.31.b
+		custom_tooltip = sc_legislation.31.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_open_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_open_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Shared Economy
+		name = sc_legislation.31.c
+		custom_tooltip = sc_legislation.31.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_open_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_open_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.30
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Federal Rights
+
+country_event = {
+	id = sc_legislation.32
+	title = sc_legislation.32.name
+	desc = sc_legislation.32.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #No Guaranteed Rights
+		name = sc_legislation.32.a
+		custom_tooltip = sc_legislation.32.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_rights_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_rights_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Limited Rights
+		name = sc_legislation.32.b
+		custom_tooltip = sc_legislation.32.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_rights_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_rights_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Full Rights
+		name = sc_legislation.32.c
+		custom_tooltip = sc_legislation.32.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_rights_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_rights_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.30
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+###Federal AIRights
+
+country_event = {
+	id = sc_legislation.33
+	title = sc_legislation.33.name
+	desc = sc_legislation.33.desc
+	picture = GFX_evt_galactic_senate
+
+	is_triggered_only = yes
+
+	option = { #No Guaranteed Rights
+		name = sc_legislation.33.a
+		custom_tooltip = sc_legislation.33.a.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_airights_none
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_rights_none
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Limited Rights
+		name = sc_legislation.33.b
+		custom_tooltip = sc_legislation.33.b.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_airights_low
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_airights_low
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+
+	option = { #Full Rights
+		name = sc_legislation.33.c
+		custom_tooltip = sc_legislation.33.c.tooltip
+		trigger = {
+			NOT = {
+				has_policy_flag = sc_federal_airights_high
+			}
+		}
+		hidden_effect = {
+			set_country_flag = sc_proposal_airights_high
+			save_event_target_as = sc_proposing_country
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				country_event = {
+					id = sc_legislation.100
+				}
+			}
+		}
+	}
+	
+	option = { #Go Back
+		name = sc_legislation.back
+		custom_tooltip = sc_legislation.back.tooltip
+		hidden_effect = {
+			country_event = {
+				id = sc_legislation.30
+			}
+		}
+	}
+	
+	option = { #Change Mind
+		name = sc_legislation.exit
+		custom_tooltip = sc_legislation.exit.tooltip
+	}
+}
+
+
+###Process Start
+
+country_event = {
+	id = sc_legislation.100
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+	}
+	
+	immediate = {
+		save_event_target_as = sc_federation_leader
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_discretionary
+			}
+			country_event = {
+				id = sc_legislation.200 #Proposal Approved
+			}
+			break = yes
+		}
+		set_variable = {
+			which = sc_aye
+			value = 0
+		}
+		set_variable = {
+			which = sc_nay
+			value = 0
+		}
+		set_variable = {
+			which = sc_abstain
+			value = 0
+		}
+		event_target:sc_proposing_country = {
+			country_event = {
+				id = sc_legislation.400
+			}
+		}
+	}
+}
+
+###Casting of Votes
+
+country_event = {
+	id = sc_legislation.101
+	title = sc_legislation.101.name
+	picture = GFX_evt_galactic_senate
+	
+	###Federal Leadership
+	
+	desc = {
+		text = sc_legislation.101.leadership_election
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_election
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.leadership_might
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_might
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.leadership_permanent
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_permanent
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.leadership_representation
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_representation
+			}
+		}
+	}
+	
+	###Federal Legislation
+	
+	desc = {
+		text = sc_legislation.101.laws_autonomous
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_autonomous
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.laws_federal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_federal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.laws_unified
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_unified
+			}
+		}
+	}
+	
+	###Legislative Process
+	
+	desc = {
+		text = sc_legislation.101.legislative_consensus
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_consensus
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.legislative_majority
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_majority
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.legislative_discretionary
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_discretionary
+			}
+		}
+	}
+	
+	###Federal Budget
+	
+	desc = {
+		text = sc_legislation.101.budget_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.budget_minimal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_minimal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.budget_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.budget_acceptable
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_acceptable
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.budget_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_high
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.budget_extreme
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_extreme
+			}
+		}
+	}
+	
+	###Federal Research Institute
+	
+	desc = {
+		text = sc_legislation.101.research_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.research_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.research_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_high
+			}
+		}
+	}
+	
+	###Federal Health Institute
+	
+	desc = {
+		text = sc_legislation.101.health_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.health_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.health_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_high
+			}
+		}
+	}
+	
+	###Open Economy
+	
+	desc = {
+		text = sc_legislation.101.open_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.open_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.open_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_high
+			}
+		}
+	}
+	
+	###Federal Rights
+	
+	desc = {
+		text = sc_legislation.101.rights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.rights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.rights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_high
+			}
+		}
+	}
+	
+	###Federal AIRights
+	
+	desc = {
+		text = sc_legislation.101.airights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.airights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.101.airights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_high
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag = sc_considering_proposal
+		has_federation = yes
+	}
+	
+	option = {
+		name = sc_legislation.101.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1.1
+				event_target:sc_proposing_country = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_proposing_country = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -200
+				}
+			}
+			modifier = {
+				factor = 0
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_1
+				}
+			}
+			modifier = {
+				factor = 0
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_2
+				}
+			}
+			modifier = {
+				factor = 0
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_3
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:sc_federation_leader = {
+				change_variable = {
+					which = sc_aye
+					value = 1
+				}
+			}
+			remove_country_flag = sc_considering_proposal
+			event_target:sc_federation_leader = {
+				country_event = {
+					id = sc_legislation.102
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_legislation.101.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0.1
+				has_policy_flag = sc_federal_consensus
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_proposing_country = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				event_target:sc_proposing_country = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -200
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:sc_federation_leader = {
+				change_variable = {
+					which = sc_nay
+					value = 1
+				}
+			}
+			remove_country_flag = sc_considering_proposal
+			event_target:sc_federation_leader = {
+				country_event = {
+					id = sc_legislation.102
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_legislation.101.c
+		ai_chance = {
+			factor = 0
+		}
+		hidden_effect = {
+			event_target:sc_federation_leader = {
+				change_variable = {
+					which = sc_abstain
+					value = 1
+				}
+			}
+			remove_country_flag = sc_considering_proposal
+			event_target:sc_federation_leader = {
+				country_event = {
+					id = sc_legislation.102
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = sc_legislation.101.d
+		trigger = {
+			NOT = {
+				is_country = event_target:sc_proposing_country
+			}
+			event_target:sc_proposing_country = {
+				NOT = {
+					has_country_flag = sc_bribery_0
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 1.1
+				event_target:sc_proposing_country = {
+					sc_trigger_shares_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 0.9
+				event_target:sc_proposing_country = {
+					sc_trigger_opposing_ethics_prev = yes
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 200
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 300
+				}
+			}
+			modifier = {
+				factor = 1.1
+				opinion = {
+					who = event_target:sc_proposing_country
+					value > 400
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -100
+				}
+			}
+			modifier = {
+				factor = 0.9
+				opinion = {
+					who = event_target:sc_proposing_country
+					value < -200
+				}
+			}
+			modifier = {
+				factor = 0
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_0
+				}
+			}
+			modifier = {
+				factor = 2
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_1
+				}
+			}
+			modifier = {
+				factor = 3
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_2
+				}
+			}
+			modifier = {
+				factor = 5
+				event_target:sc_proposing_country = {
+					has_country_flag = sc_bribery_3
+				}
+			}
+		}
+		custom_tooltip = SC_ACCEPT_BRIBE
+		hidden_effect = {
+			event_target:sc_proposing_country = {
+				switch = {
+					trigger = has_country_flag
+					sc_bribery_1 = {
+						PREV = {
+							add_influence = 50
+						}
+					}
+					sc_bribery_2 = {
+						PREV = {
+							add_influence = 125
+						}
+					}
+					sc_bribery_3 = {
+						PREV = {
+							add_influence = 250
+						}
+					}
+				}
+			}
+			event_target:sc_federation_leader = {
+				change_variable = {
+					which = sc_aye
+					value = 1
+				}
+			}
+			remove_country_flag = sc_considering_proposal
+			event_target:sc_federation_leader = {
+				country_event = {
+					id = sc_legislation.102
+				}
+			}
+		}
+	}
+}
+
+###Voting Over Check Event
+
+country_event = {
+	id = sc_legislation.102
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		NOT = {
+			any_country = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				has_country_flag = sc_considering_proposal
+			}
+		}
+	}
+	immediate = {
+		country_event = {
+			id = sc_legislation.103
+		}
+	}		
+}
+
+###Proposal Results
+
+country_event = {
+	id = sc_legislation.103
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_consensus
+				AND = {
+					check_variable = {
+						which = sc_aye
+						value > 0
+					}
+					check_variable = {
+						which = sc_nay
+						value = 0
+					}
+				}
+			}
+			country_event = {
+				id = sc_legislation.200
+			}
+			break = yes
+		}
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_consensus
+				OR = {
+					check_variable = {
+						which = sc_aye
+						value = 0
+					}
+					check_variable = {
+						which = sc_nay
+						value > 0
+					}
+				}
+			}
+			country_event = {
+				id = sc_legislation.300
+			}
+			break = yes
+		}
+		if = {
+			limit = {
+				has_policy_flag = sc_federal_majority
+				check_variable = {
+					which = sc_aye
+					value > sc_nay
+				}
+			}
+			country_event = {
+				id = sc_legislation.200
+			}
+			break = yes
+		}
+		country_event = {
+			id = sc_legislation.300
+		}
+	}
+}
+
+###Proposal Passed
+
+country_event = {
+	id = sc_legislation.200
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		event_target:sc_proposing_country = {
+			sc_effect_pass_proposal = yes
+		}
+		every_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+			}
+			set_country_flag = sc_proposal_notification
+			country_event = {
+				id = sc_legislation.201
+			}
+		}
+	}
+}
+
+country_event = {
+	id = sc_legislation.201
+	title = sc_legislation.201.name
+	picture = GFX_evt_galactic_senate
+	
+	###Federal Leadership
+	
+	desc = {
+		text = sc_legislation.201.leadership_election
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_election
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.leadership_might
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_might
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.leadership_permanent
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_permanent
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.leadership_representation
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_representation
+			}
+		}
+	}
+	
+	###Federal Legislation
+	
+	desc = {
+		text = sc_legislation.201.laws_autonomous
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_autonomous
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.laws_federal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_federal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.laws_unified
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_unified
+			}
+		}
+	}
+	
+	###Legislative Process
+	
+	desc = {
+		text = sc_legislation.201.legislative_consensus
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_consensus
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.legislative_majority
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_majority
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.legislative_discretionary
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_discretionary
+			}
+		}
+	}
+	
+	###Federal Budget
+	
+	desc = {
+		text = sc_legislation.201.budget_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.budget_minimal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_minimal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.budget_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.budget_acceptable
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_acceptable
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.budget_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_high
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.budget_extreme
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_extreme
+			}
+		}
+	}
+	
+	###Federal Research Institute
+	
+	desc = {
+		text = sc_legislation.201.research_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.research_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.research_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_high
+			}
+		}
+	}
+	
+	###Federal Health Institute
+	
+	desc = {
+		text = sc_legislation.201.health_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.health_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.health_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_high
+			}
+		}
+	}
+	
+	###Open Economy
+	
+	desc = {
+		text = sc_legislation.201.open_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.open_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.open_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_high
+			}
+		}
+	}
+	
+	###Federal Rights
+	
+	desc = {
+		text = sc_legislation.201.rights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.rights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.rights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_high
+			}
+		}
+	}
+	
+	###Federal aiRights
+	
+	desc = {
+		text = sc_legislation.201.airights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.airights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.201.airights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_high
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+	
+	option = {
+		name = OK
+		hidden_effect = {
+			remove_country_flag = sc_proposal_notification
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}				
+				}
+				country_event = {
+					id = sc_legislation.202
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = sc_legislation.202
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		NOT = {
+			any_country = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				has_country_flag = sc_proposal_notification
+			}
+		}
+	}
+	immediate = {
+		every_country = {
+			limit = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}				
+			}
+			remove_country_flag = sc_bribery_0
+			remove_country_flag = sc_bribery_1
+			remove_country_flag = sc_bribery_2
+			remove_country_flag = sc_bribery_3
+			remove_country_flag = sc_proposal_ongoing
+			remove_country_flag = sc_proposal_leadership_election
+			remove_country_flag = sc_proposal_leadership_might
+			remove_country_flag = sc_proposal_leadership_permanent
+			remove_country_flag = sc_proposal_leadership_representation
+			remove_country_flag = sc_proposal_laws_autonomous
+			remove_country_flag = sc_proposal_laws_federal
+			remove_country_flag = sc_proposal_laws_unified
+			remove_country_flag = sc_proposal_legislative_consensus
+			remove_country_flag = sc_proposal_legislative_majority
+			remove_country_flag = sc_proposal_legislative_discretionary
+			remove_country_flag = sc_proposal_budget_none
+			remove_country_flag = sc_proposal_budget_minimal
+			remove_country_flag = sc_proposal_budget_low
+			remove_country_flag = sc_proposal_budget_acceptable
+			remove_country_flag = sc_proposal_budget_high
+			remove_country_flag = sc_proposal_budget_extreme
+			remove_country_flag = sc_proposal_research_none
+			remove_country_flag = sc_proposal_research_low
+			remove_country_flag = sc_proposal_research_high
+			remove_country_flag = sc_proposal_health_none
+			remove_country_flag = sc_proposal_health_low
+			remove_country_flag = sc_proposal_health_high
+			remove_country_flag = sc_proposal_open_none
+			remove_country_flag = sc_proposal_open_low
+			remove_country_flag = sc_proposal_open_high
+			remove_country_flag = sc_proposal_rights_none
+			remove_country_flag = sc_proposal_rights_low
+			remove_country_flag = sc_proposal_rights_high
+		}
+	}	
+}
+
+###Proposal Failed
+
+country_event = {
+	id = sc_legislation.300
+	hide_window = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		every_country = {
+			limit = {
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+			}
+			set_country_flag = sc_proposal_notification
+			country_event = {
+				id = sc_legislation.301
+			}
+		}	
+	}
+}
+
+country_event = {
+	id = sc_legislation.301
+	title = sc_legislation.301.name
+	picture = GFX_evt_galactic_senate
+	
+	###Federal Leadership
+	
+	desc = {
+		text = sc_legislation.301.leadership_election
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_election
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.leadership_might
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_might
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.leadership_permanent
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_permanent
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.leadership_representation
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_leadership_representation
+			}
+		}
+	}
+	
+	###Federal Legislation
+	
+	desc = {
+		text = sc_legislation.301.laws_autonomous
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_autonomous
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.laws_federal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_federal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.laws_unified
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_laws_unified
+			}
+		}
+	}
+	
+	###Legislative Process
+	
+	desc = {
+		text = sc_legislation.301.legislative_consensus
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_consensus
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.legislative_majority
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_majority
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.legislative_discretionary
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_legislative_discretionary
+			}
+		}
+	}
+	
+	###Federal Budget
+	
+	desc = {
+		text = sc_legislation.301.budget_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.budget_minimal
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_minimal
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.budget_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.budget_acceptable
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_acceptable
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.budget_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_high
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.budget_extreme
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_budget_extreme
+			}
+		}
+	}
+	
+	###Federal Research Institute
+	
+	desc = {
+		text = sc_legislation.301.research_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.research_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.research_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_research_high
+			}
+		}
+	}
+	
+	###Federal Health Institute
+	
+	desc = {
+		text = sc_legislation.301.health_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.health_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.health_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_health_high
+			}
+		}
+	}
+	
+	###Open Economy
+	
+	desc = {
+		text = sc_legislation.301.open_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.open_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.open_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_open_high
+			}
+		}
+	}
+	
+	###Federal Rights
+	
+	desc = {
+		text = sc_legislation.301.rights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.rights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.rights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_rights_high
+			}
+		}
+	}
+	
+    
+	###Federal aiRights
+	
+	desc = {
+		text = sc_legislation.301.airights_none
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_none
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.airights_low
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_low
+			}
+		}
+	}
+	desc = {
+		text = sc_legislation.301.airights_high
+		trigger = {
+			event_target:sc_proposing_country = {
+				has_country_flag = sc_proposal_airights_high
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = {
+		name = OK
+		hidden_effect = {
+			remove_country_flag = sc_proposal_notification
+			random_country = {
+				limit = {
+					has_federation = yes
+					is_federation_leader = yes
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}				
+				}
+				country_event = {
+					id = sc_legislation.302
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = sc_legislation.302
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		NOT = {
+			any_country = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}
+				has_country_flag = sc_proposal_notification
+			}
+		}
+	}
+	immediate = {
+		every_country = {
+			limit = {
+				has_federation = yes
+				OR = {
+					is_in_federation_with = ROOT
+					is_country = ROOT
+				}				
+			}
+			remove_country_flag = sc_bribery_0
+			remove_country_flag = sc_bribery_1
+			remove_country_flag = sc_bribery_2
+			remove_country_flag = sc_bribery_3
+			remove_country_flag = sc_proposal_ongoing
+			remove_country_flag = sc_proposal_leadership_election
+			remove_country_flag = sc_proposal_leadership_might
+			remove_country_flag = sc_proposal_leadership_permanent
+			remove_country_flag = sc_proposal_leadership_representation
+			remove_country_flag = sc_proposal_laws_autonomous
+			remove_country_flag = sc_proposal_laws_federal
+			remove_country_flag = sc_proposal_laws_unified
+			remove_country_flag = sc_proposal_legislative_consensus
+			remove_country_flag = sc_proposal_legislative_majority
+			remove_country_flag = sc_proposal_legislative_discretionary
+			remove_country_flag = sc_proposal_budget_none
+			remove_country_flag = sc_proposal_budget_minimal
+			remove_country_flag = sc_proposal_budget_low
+			remove_country_flag = sc_proposal_budget_acceptable
+			remove_country_flag = sc_proposal_budget_high
+			remove_country_flag = sc_proposal_budget_extreme
+			remove_country_flag = sc_proposal_research_none
+			remove_country_flag = sc_proposal_research_low
+			remove_country_flag = sc_proposal_research_high
+			remove_country_flag = sc_proposal_health_none
+			remove_country_flag = sc_proposal_health_low
+			remove_country_flag = sc_proposal_health_high
+			remove_country_flag = sc_proposal_open_none
+			remove_country_flag = sc_proposal_open_low
+			remove_country_flag = sc_proposal_open_high
+			remove_country_flag = sc_proposal_rights_none
+			remove_country_flag = sc_proposal_rights_low
+			remove_country_flag = sc_proposal_rights_high
+		}
+	}		
+}
+
+###Bribery Event
+
+country_event = {
+	id = sc_legislation.400
+	title = sc_legislation.400.name
+	desc = sc_legislation.400.desc
+	picture = GFX_evt_galactic_senate
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		is_country = event_target:sc_proposing_country
+	}
+
+	
+	option = {
+		name = sc_legislation.400.a
+		trigger = {
+			influence > 100
+		}
+		hidden_effect = {
+			add_influence = -100
+			set_country_flag = sc_bribery_1
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_considering_proposal
+			}
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+						has_country_flag = sc_considering_proposal
+					}
+				}
+				country_event = {
+					id = sc_legislation.101
+				}
+			}
+		}
+	}
+	option = {
+		name = sc_legislation.400.b
+		trigger = {
+			influence > 250
+		}
+		hidden_effect = {
+			add_influence = -250
+			set_country_flag = sc_bribery_2
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_considering_proposal
+			}
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+						has_country_flag = sc_considering_proposal
+					}
+				}
+				country_event = {
+					id = sc_legislation.101
+				}
+			}
+		}
+	}
+	option = {
+		name = sc_legislation.400.c
+		trigger = {
+			influence > 500
+		}
+		hidden_effect = {
+			add_influence = -500
+			set_country_flag = sc_bribery_3
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_considering_proposal
+			}
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+						has_country_flag = sc_considering_proposal
+					}
+				}
+				country_event = {
+					id = sc_legislation.101
+				}
+			}
+		}
+	}
+	option = {
+		name = sc_legislation.400.d
+		hidden_effect = {
+			set_country_flag = sc_bribery_0
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+					}
+				}
+				set_country_flag = sc_considering_proposal
+			}
+			every_country = {
+				limit = {
+					OR = {
+						is_in_federation_with = ROOT
+						is_country = ROOT
+						has_country_flag = sc_considering_proposal
+					}
+				}
+				country_event = {
+					id = sc_legislation.101
+				}
+			}
+		}
+	}
+}

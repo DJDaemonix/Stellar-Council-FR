@@ -1,0 +1,26 @@
+
+namespace = sc_maintenance
+
+### Maintenance Events ###
+
+
+### Law Synchronize
+
+country_event = {
+	id = sc_maintenance.1
+	hide_window = yes
+	
+	trigger = {
+		has_federation = yes
+		is_federation_leader = yes
+		sc_trigger_diff_laws = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		sc_effect_sync_laws = yes
+	}
+}
