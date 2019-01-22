@@ -8,16 +8,16 @@
  
  sc_election.10.name:0 "Elections Fédérales"
  sc_election.10.desc:0 "C'est l'heure des élections une fois de plus. Il est temps pour nous de décider qui aura notre soutien."
- sc_election.10.a:0 "Aucunus ne pouvons seulement nous faire confiance pour diriger."
+ sc_election.10.a:0 "Nous ne pouvons seulement nous faire confiance pour diriger."
  sc_election.10.b:0 "La [sc_candidate_b.GetName] aura notre appui."
- sc_election.10.c:0 "Aucunus soutiendrons la [sc_candidate_c.GetName] !"
+ sc_election.10.c:0 "Nous soutiendrons la [sc_candidate_c.GetName] !"
  sc_election.10.d:0 "La [sc_candidate_d.GetName] est le choix évident."
- sc_election.10.e:0 "Aucunus devons reconsidérer nos options."
+ sc_election.10.e:0 "Nous devons reconsidérer nos options."
  sc_election.14.name:0 "Résultats des Elections"
- sc_election.14.desc_win:0 "Aucunus avons remporté les élections ! C'est une occasion capitale ! Aucunus avons remporté [Root.sc_votes] voix."
- sc_election.14.desc_lose:0 "Aucunus avons perdu les élections. Le nouveau dirigeant de la Féderation est la [sc_winner.GetName], avec [sc_winner.sc_votes] voix. Aucunus avions reçu [Root.sc_votes] voix."
+ sc_election.14.desc_win:0 "Nous avons remporté les élections ! C'est une occasion capitale ! Nous avons remporté [Root.sc_votes] voix."
+ sc_election.14.desc_lose:0 "Nous avons perdu les élections. Le nouveau dirigeant de la Féderation est la [sc_winner.GetName], avec [sc_winner.sc_votes] voix. Nous avions reçu [Root.sc_votes] voix."
  sc_election.100.name:0 "Elections Fédérales"
- sc_election.100.desc:0 "C'est l'heure des élections une fois de plus. Aucuntre peuple est maintenant en train de voter pour leur candidat de choix qui deviendra Président de la Fédération."
+ sc_election.100.desc:0 "C'est l'heure des élections une fois de plus. Notre peuple est maintenant en train de voter pour leur candidat de choix qui deviendra Président de la Fédération."
  
  sc_proposal_results.desc:0 "\n\nRésultats de Proposition :\nPour :[sc_federation_leader.sc_aye]\nContre :[sc_federation_leader.sc_nye]\nAbstentions :[sc_federation_leader.sc_abstain]"
  
@@ -137,7 +137,7 @@
  sc_legislation.400.d:0 "Ne Rien Offrir"
  
  sc_legislation.1.name:0 "Ebauchage d'une Proposition"
- sc_legislation.1.desc:0 "Aucunus avons commencé à ébaucher une proposition sur la Législation Fédérale. Sur quelle classification législative est-ce que cette proposition devrait porter ?"
+ sc_legislation.1.desc:0 "Nous avons commencé à ébaucher une proposition sur la Législation Fédérale. Sur quelle classification législative est-ce que cette proposition devrait porter ?"
  sc_legislation.1.a:0 "Proposition sur le Système de Gouvernement Fédéral"
  sc_legislation.1.a.tooltip:0 "Proposition sur comment le Système Fédéral devrait fonctionner."
  sc_legislation.1.b:0 "Proposition de Législation de Régulation Basique Fédérale"
@@ -205,7 +205,7 @@
  sc_legislation.21.f:0 "Budget de Militarisation Extrême"
  sc_legislation.21.f.tooltip:0 "Une quantité Extrême de ressources seront allouées."
  sc_legislation.22.name:0 "Ebauche de Proposition sur l'Institut de Recherche Fédérale"
- sc_legislation.22.desc:0 "Aucuns avancées technologiques peuvent être accélérées en combinant les ressources de nos Etats-Membres, au prix d'un financement plus élevé."
+ sc_legislation.22.desc:0 "Nos avancées technologiques peuvent être accélérées en combinant les ressources de nos Etats-Membres, au prix d'un financement plus élevé."
  sc_legislation.22.a:0 "Abolir"
  sc_legislation.22.a.tooltip:0 "L'Institut de Recherche Fédérale est abolie, par conséquent n'utilisera plus aucune ressource."
  sc_legislation.22.b:0 "Financement Faible"
@@ -338,7 +338,7 @@
  sc_federal_research_low_name:0 "Faible Financement de Recherche"
  sc_federal_research_low_desc:0 "Faible Budget alloué à la Recherche."
  sc_federal_research_high:0 "Elevé"
- sc_federal_research_high_name:0 "Elevé Financement de Recherche"
+ sc_federal_research_high_name:0 "Financement Elevé de Recherche"
  sc_federal_research_high_desc:0 "Budget Large alloué à la Recherche."
  
  policy_sc_federal_health:0 "Législation Fédérale : Institut de Santé"
@@ -350,7 +350,7 @@
  sc_federal_health_low_name:0 "Faible Financement à la Santé"
  sc_federal_health_low_desc:0 "Faible Budget alloué à la Santé."
  sc_federal_health_high:0 "Elevé"
- sc_federal_health_high_name:0 "Elevé Financement à la Santé"
+ sc_federal_health_high_name:0 "Financement Elevé à la Santé"
  sc_federal_health_high_desc:0 "Budget Large alloué à la Santé."
  
  policy_sc_federal_open:0 "Législation Fédérale : Economie Ouverte"
